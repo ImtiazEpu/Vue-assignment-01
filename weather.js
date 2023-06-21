@@ -1,24 +1,17 @@
 export function weatherApi(element) {
-  // let counter = 0
-  // const setCounter = (count) => {
-  //   counter = count
-  //   element.innerHTML = `count is ${counter}`
-  // }
-  // element.addEventListener('click', () => setCounter(counter + 1))
-  // setCounter(0)
 
-
+  //Api key  
 const apiKey = '1ad067633ecd428c80a173928232106';
-//const weatherInfo = document.getElementById('weatherInfo');
+
 
 const getWeatherData = async (location) => {
   element.innerHTML = '';
 
   try {
     
+    //API response
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`);
     const data = await response.json();
-    console.log(data);
 
     // Display weather information
     const cityName = data.location.name;
@@ -40,6 +33,7 @@ const getWeatherData = async (location) => {
   }
 };
 
+//Error display
 const displayError = (message) => {
   const errorElement = document.createElement('p');
   errorElement.classList.add('error');
