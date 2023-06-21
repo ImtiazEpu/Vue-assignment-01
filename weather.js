@@ -12,18 +12,33 @@ const getWeatherData = async (location) => {
     //API response
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`);
     const data = await response.json();
+    console.log(data);
 
     // Display weather information
     const cityName = data.location.name;
+    const lat = data.location.lat;
+    const lon = data.location.lon;
     const temperature = data.current.temp_c;
+    const feelslike = data.current.feelslike_c;
     const description = data.current.condition.text;
+    const icon = data.current.condition.icon;
     const humidity = data.current.humidity;
+    const wind = data.current.wind_kph;
+    const vis = data.current.vis_km;
+    
 
     const weatherDisplay = `
-      <h3>${cityName}</h3>
-      <p>Temperature: ${temperature}°C</p>
-      <p>Description: ${description}</p>
-      <p>Humidity: ${humidity}%</p>
+      <h3 style="color:#be34fc">${cityName}</h3>
+      <p>latitude: <strong style="color:#6ea7fd">${lat}</strong></p>
+      <p>longitude: <strong style="color:#6ea7fd">${lon}</strong></p>
+      <p>Temperature: <strong style="color:#6ea7fd">${temperature}°C</strong></p>
+      <p>Feels like: <strong style="color:#6ea7fd">${feelslike}°C</strong></p>
+      <p style="display: flex;
+      align-items: center;
+      justify-content: center; gap:5px;" >Description: <strong style="color:#6ea7fd"> ${description}</strong> <img style="width:24px;" src="${icon}"/></p>
+      <p>Humidity: <strong style="color:#6ea7fd">${humidity}%</strong></p>
+      <p>Wind (kph): <strong style="color:#6ea7fd">${wind}</strong></p>
+      <p>Visibility (kph): <strong style="color:#6ea7fd">${vis}</strong></p>
     `;
 
     element.innerHTML = weatherDisplay;
